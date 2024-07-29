@@ -51,6 +51,7 @@ function Index() {
   return (
     <>
       <IndexNavbar />
+      {/*  */}
       {/**<IndexHeader /> */}
       <IndexHeader />
       <div className="main">
