@@ -24,7 +24,7 @@ import ReactDatetime from "react-datetime";
 import {
   Button,
   FormGroup,
-  InputGroupAddon,
+  // InputGroupAddon,
   InputGroupText,
   InputGroup,
   Modal,
@@ -212,13 +212,13 @@ function SectionJavaScript() {
                           placeholder: "Datetime Picker Here",
                         }}
                       />
-                      <InputGroupAddon addonType="append">
+                      {/* <InputGroupAddon addonType="append"> */}
                         <InputGroupText>
                           <span className="glyphicon glyphicon-calendar">
                             <i aria-hidden={true} className="fa fa-calendar" />
                           </span>
                         </InputGroupText>
-                      </InputGroupAddon>
+                      {/* </InputGroupAddon> */}
                     </InputGroup>
                   </FormGroup>
                 </Col>

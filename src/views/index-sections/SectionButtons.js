@@ -26,13 +26,13 @@ import {
   Label,
   FormGroup,
   Input,
-  InputGroupAddon,
+  // InputGroupAddon,
   InputGroupText,
   InputGroup,
   Container,
   Row,
   Col,
-  CustomInput,
+  // CustomInput,
 } from "reactstrap";
 
 function SectionButtons() {
@@ -328,11 +328,11 @@ function SectionButtons() {
             <Col sm="3">
               <InputGroup>
                 <Input placeholder="Username" type="text" />
-                <InputGroupAddon addonType="append">
+                {/* <InputGroupAddon addonType="append"> */}
                   <InputGroupText>
                     <i aria-hidden={true} className="fa fa-group" />
                   </InputGroupText>
-                </InputGroupAddon>
+                {/* </InputGroupAddon> */}
               </InputGroup>
             </Col>
           </Row>
@@ -430,20 +430,24 @@ function SectionButtons() {
                 <h3>Toggle Buttons</h3>
               </div>
               <div id="switches">
-                <CustomInput
+                {/* <CustomInput */}
+                <input
                   type="switch"
                   id="exampleCustomSwitch1"
                   name="customSwitch1"
                   defaultChecked
                   label="Default On"
                 />
+                {/* /> */}
                 <br />
-                <CustomInput
+                {/* <CustomInput */}
+                <input
                   type="switch"
                   id="exampleCustomSwitch2"
                   name="customSwitch2"
                   label="Default Off"
                 />
+                {/* /> */}
               </div>
             </Col>
             <Col lg="3" sm="6">

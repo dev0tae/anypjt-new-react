@@ -35,23 +35,18 @@ function RegisterPage() {
     };
   });
 
-  const [data , setData] = React.useState("하하");
   
   function registerMember() {
-  console.log('타니?');
-  axios.get("http://localhost:8080/registerMember")
+  axios.post("http://localhost:8080/api/user", null)
   .then(function (response) {
-    console.log(response.data);
-      setData(response.data);
+      console.log(response.data);
+      alert(response.data);
     }).catch(function (error) {
       console.log(error);
     }).then(function() {
     });
   }
-  
-  console.log(data);
-  
-
+//
   return (
     <>
       <ExamplesNavbar />
