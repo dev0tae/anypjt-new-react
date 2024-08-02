@@ -36,18 +36,100 @@ function RegisterPage() {
       document.body.classList.remove("register-page");
     };
   });
-  
-  function registerMember() {
-    // 파라미터가 없을 경우 null 삽입
-    axios.post("http://localhost:8080/api/user", null)
-    .then(function (response) {
-        console.log(response.data);
-        alert(response.data);
-      }).catch(function (error) {
-        console.log(error);
-      }).then(function() {
-      });
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [nickname, setNickname] = useState('');
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordCheckError, setPasswordCheckError] = useState('');
+  const [nicknameError, setNicknameError] = useState('');
+
+   // 유효성 검사를 통과하는지 여부를 저장하는 상태
+   const [isFormValid, setIsFormValid] = useState(false);
+
+   React.useEffect(() => {
+    // 모든 유효성 검사를 통과해야 버튼을 활성화
+    const isValid = !emailError && !passwordError && !passwordCheckError && !nicknameError;
+    setIsFormValid(isValid && email && password && passwordCheck && nickname);
+  }, [emailError, passwordError, passwordCheckError, email, password, passwordCheck, nickname, nicknameError]);
+
+  const validateEmail = (value) => {
+    // 이메일 유효성 검사 (간단한 예제)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value) ? '' : '이메일 형식이 맞지 않습니다.';
+  };
+
+  const validatePassword = (value) => {
+    // 비밀번호 유효성 검사 (예: 최소 6자 이상)
+    return value.length >= 6 ? '' : '비밀번호는 최소 6자 이상이어야 합니다.';
+  };
+
+  const validatePasswordCheck = (value) => {
+    // 비밀번호 확인 유효성 검사
+    return value === password ? '' : '비밀번호가 일치하지 않습니다.';
+  };
+
+  const validateNickname = (value) => {
+    // 비밀번호 확인 유효성 검사
+    return value.length >= 2 ? '' : '닉네임은 두 글자 이상이어야 합니다.';
+  };
+
+  const handleEmailChange = (e) => {
+    const { value } = e.target;
+    setEmail(value);
+    setEmailError(validateEmail(value));
+  };
+
+  const handlePasswordChange = (e) => {
+    const { value } = e.target;
+    setPassword(value);
+    setPasswordError(validatePassword(value));
+    // 비밀번호 확인도 실시간으로 검사
+    setPasswordCheckError(validatePasswordCheck(passwordCheck));
+  };
+
+  const handlePasswordCheckChange = (e) => {
+    const { value } = e.target;
+    setPasswordCheck(value);
+    setPasswordCheckError(validatePasswordCheck(value));
+  };
+
+  const handleNicknameChange = (e) => {
+    const { value } = e.target;
+    setNickname(value);
+    setNicknameError(validateNickname(value));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // 최종 유효성 검사 및 제출 로직
+    if (!emailError && !passwordError && !passwordCheckError && !nicknameError) {
+      // 폼 제출 로직
+      console.log('Form submitted');
+      // post일 경우 파라미터가 없을 경우 null 삽입
+      axios.post("http://localhost:8080/api/user", {
+        nickname: nickname,
+        userEmail: email,
+        userPw : password
+      })
+      .then(function (response) {
+          alert('성공!');
+          console.log(response.data);
+        }).catch(function (error) {
+          console.log(error);
+        }).then(function() {
+        });
+    }
+  };
+
+  // 유효성 검사 정리
+  function isValidation() {
+
   }
+
 
   return (
     <>
@@ -91,18 +173,29 @@ function RegisterPage() {
                   </Button>
                 </div>
                 
-                <Form className="register-form">
+                {/* 회원 가입 정보 입력 */}
+                <Form className="register-form" onSubmit={handleSubmit}>
                   
+                  <label>닉네임</label>
+                  <Input placeholder="nickname." type="text" value={nickname} onChange={handleNicknameChange} required/>
+                  {nicknameError && <p className="error-message">{nicknameError}</p>}
+
+                  {/* 이메일 */}
                   <label>Email</label>
-                  <Input placeholder="Email" type="text"/>
-                  
+                  <Input placeholder="Email" type="email" value={email} onChange={handleEmailChange} required/>
+                  {emailError && <p className="error-message">{emailError}</p>}
+
+                  {/* 비밀번호 */}
                   <label>Password</label>
-                  <Input placeholder="Password" type="password"/>
+                  <Input placeholder="Password" type="password" value={password} onChange={handlePasswordChange} required/>
+                  {passwordError && <p className="error-message">{passwordError}</p>}
 
+                  {/* 비밀번호 확인 */}
                   <label>Password Check</label>
-                  <Input placeholder="Password Check" type="password"/>
+                  <Input placeholder="Password Check" type="password" value={passwordCheck} onChange={handlePasswordCheckChange} required/>
+                  {passwordCheckError && <p className="error-message">{passwordCheckError}</p>}
 
-                  <Button block className="btn-round" color="danger" type="submit">
+                  <Button block className="btn-round" color="danger" type="submit" disabled={!isFormValid}>
                     Register
                   </Button>
 
