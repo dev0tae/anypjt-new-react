@@ -322,6 +322,7 @@ function LandingPage() {
                     <Col md="6">
                       <label>Name</label>
                       <InputGroup>
+                        {/* default props erros 수정}
                         {/* <InputGroupAddon addonType="prepend"> */}
                           <InputGroupText>
                             <i className="nc-icon nc-single-02" />

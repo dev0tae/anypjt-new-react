@@ -17,16 +17,18 @@
 
 */
 import React, { useState } from "react";
+import axios from "axios";
 
 // reactstrap components
 import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
-import axios from "axios";
+
 
 // core components
 // import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import ExamplesNavbar from "components/Navbars/IndexNavbar.js";
 
 function RegisterPage() {
+
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
     document.body.classList.add("register-page");
@@ -34,19 +36,19 @@ function RegisterPage() {
       document.body.classList.remove("register-page");
     };
   });
-
   
   function registerMember() {
-  axios.post("http://localhost:8080/api/user", null)
-  .then(function (response) {
-      console.log(response.data);
-      alert(response.data);
-    }).catch(function (error) {
-      console.log(error);
-    }).then(function() {
-    });
+    // 파라미터가 없을 경우 null 삽입
+    axios.post("http://localhost:8080/api/user", null)
+    .then(function (response) {
+        console.log(response.data);
+        alert(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      }).then(function() {
+      });
   }
-//
+
   return (
     <>
       <ExamplesNavbar />
@@ -88,17 +90,24 @@ function RegisterPage() {
                     <i className="fa fa-twitter" />
                   </Button>
                 </div>
+                
                 <Form className="register-form">
+                  
                   <label>Email</label>
-                  <Input placeholder="Email" type="text" />
+                  <Input placeholder="Email" type="text"/>
+                  
                   <label>Password</label>
-                  <Input placeholder="Password" type="password" />
+                  <Input placeholder="Password" type="password"/>
+
                   <label>Password Check</label>
-                  <Input placeholder="Password Check" type="password" />
-                  <Button block className="btn-round" color="danger" onClick={registerMember}>
+                  <Input placeholder="Password Check" type="password"/>
+
+                  <Button block className="btn-round" color="danger" type="submit">
                     Register
                   </Button>
+
                 </Form>
+                
                 <div className="forgot">
                   <Button
                     className="btn-link"

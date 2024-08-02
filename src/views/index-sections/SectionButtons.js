@@ -430,8 +430,9 @@ function SectionButtons() {
                 <h3>Toggle Buttons</h3>
               </div>
               <div id="switches">
+                {/* default props erros 수정}
                 {/* <CustomInput */}
-                <input
+                <Input
                   type="switch"
                   id="exampleCustomSwitch1"
                   name="customSwitch1"
@@ -441,7 +442,7 @@ function SectionButtons() {
                 {/* /> */}
                 <br />
                 {/* <CustomInput */}
-                <input
+                <Input
                   type="switch"
                   id="exampleCustomSwitch2"
                   name="customSwitch2"
