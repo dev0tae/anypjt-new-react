@@ -70,8 +70,11 @@ function Index() {
         <SectionLogin />
         <SectionExamples />
         <SectionDownload />
+        <SectionCarousel /> // 에러 react-dom.development.js:74 Warning: findDOMNode is deprecated and will be removed in the next major release. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node
+                            // at Transition (http://localhost:3000/static/js/bundle.js:64305:30) 외부 라이브러리 문제인듯.
         */}
-        <SectionCarousel />
+        <SectionProgress />
+        <SectionButtons />
         <DemoFooter />
       </div>
     </>
